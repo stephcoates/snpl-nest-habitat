@@ -131,3 +131,26 @@ create_candidate_model_table <- function(models_list) {
   
   return(model_table)
 }
+
+# Plotting: set a font theme
+font_theme <- theme(
+  plot.title = element_text(size = 11),
+  axis.title.x = element_text(size = 10),
+  axis.title.y = element_text(size = 10),
+  axis.text.x = element_text(size = 10),
+  axis.text.y = element_text(size = 10)
+)
+
+# Plotting: Function to create a vertical label plot
+make_row_label <- function(label_text, width = 10) {
+  ggplot() +
+    annotate(
+      "text", 
+      x = 0.5, y = 0.5, 
+      label = str_wrap(label_text, width = width),  # wrap text
+      angle = 90, 
+      size = 4, 
+      hjust = 0.5, vjust = 0.5
+    ) +
+    theme_void()
+}
