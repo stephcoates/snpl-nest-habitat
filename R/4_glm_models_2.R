@@ -1,13 +1,13 @@
 # Modeling nests vs. random sites with logistic regression
 # 1. define the null model for all data, summer subset, and fall subset
 # 2. test use of linear or quadratic terms for covariates
-# 3. global models and candidate models
+# 3. Check VIF, create global models and test candidate models for GoF and RE
 # 3.a. all data: summarized microhabitat, functional groups, individual species
-# 3.b. breeding season data: summarized microhabitat, functional groups, individual species
+# 3.b. breeding season data: summarized microhabitat, functional groups, 
+# individual species
 # 3.c. fall data: summarized microhabitat, functional groups, individual species
-# 4. use stepwise function to test submodels of each global model, compare AIC
-# 5. check model fit, VIF; remove poor fitting models and check for high VIF
-# 6. compare remaining candidate models
+# 4. Candidate model table (Tables S1)
+# 5. Model results table (Tables S2)
 
 # load packages and functions and data
 source('R/packages.R')
@@ -840,7 +840,7 @@ cand.mods.all.3groups <- dplyr::bind_rows(
 
 write_csv(cand.mods.all.3groups, "tables/Candidate_Models_AllSubsets_3Groups.csv")
 
-# Create model results tables
+# 5. Create model results tables ----
 # results for all "selected" models 
 
 #create list of selected models - all data
