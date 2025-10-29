@@ -1,0 +1,22 @@
+Model,Term,Estimate,Std.Error,z,Low_CI,High_CI,p-value,Sig
+fullmod.1.sm,(Intercept),1.783,0.774,2.303,0.266,3.3,0.0213,*
+fullmod.1.sm,Object_TypeNone,-3.695,0.9,-4.106,-5.459,-1.931,4.02e-5,***
+fullmod.1.sm,Object_TypeVegetation,-1.403,0.838,-1.674,-3.046,0.24,0.0942,.
+fullmod.1.sm,"poly(TwoVeg, 2)1",-33.356,11.873,-2.809,-56.627,-10.086,0.00496,**
+fullmod.1.sm,"poly(TwoVeg, 2)2",-2.08,10.202,-0.204,-22.075,17.915,0.838,
+fullmod.1.sm,"poly(Half, 2)1",16.041,5.961,2.691,4.357,27.724,0.00713,**
+fullmod.1.sm,"poly(Half, 2)2",-16.929,5.74,-2.949,-28.179,-5.678,0.00319,**
+fullmod.1.fg,(Intercept),2.768,0.859,3.222,1.084,4.451,0.00127,**
+fullmod.1.fg,Object_TypeNone,-5.223,0.857,-6.094,-6.903,-3.543,1.1e-9,***
+fullmod.1.fg,Object_TypeVegetation,-1.112,0.841,-1.322,-2.76,0.536,0.186,
+fullmod.1.fg,"poly(Pioneer_Stabilizers, 2)1",-49.503,28.257,-1.752,-104.885,5.879,0.0798,.
+fullmod.1.fg,"poly(Pioneer_Stabilizers, 2)2",-39.359,20.595,-1.911,-79.724,1.006,0.056,.
+fullmod.1.fg,Pioneer_Builders,-0.268,0.077,-3.464,-0.42,-0.116,5.33e-4,***
+fullmod.2.is,(Intercept),1.921,0.824,2.33,0.305,3.537,0.0198,*
+fullmod.2.is,Object_TypeNone,-5.272,0.872,-6.044,-6.982,-3.563,1.5e-9,***
+fullmod.2.is,Object_TypeVegetation,-1.785,0.843,-2.119,-3.437,-0.134,0.0341,*
+fullmod.2.is,"poly(BS, 2)1",-44.703,25.497,-1.753,-94.675,5.27,0.0796,.
+fullmod.2.is,"poly(BS, 2)2",-38.144,18.664,-2.044,-74.724,-1.564,0.041,*
+fullmod.2.is,IP,1.094,0.428,2.554,0.254,1.934,0.0107,*
+fullmod.2.is,"poly(SR, 2)1",-10.358,4.498,-2.303,-19.175,-1.541,0.0213,*
+fullmod.2.is,"poly(SR, 2)2",1.01,5.698,0.177,-10.158,12.178,0.859,

@@ -1,0 +1,34 @@
+Model,Term,Estimate,Std.Error,z,Low_CI,High_CI,p-value,Sig
+fallmod.2.sm,(Intercept),-3.81,3.247,-1.173,-10.174,2.554,0.241,
+fallmod.2.sm,Object_TypeNone,-5.467,1.362,-4.014,-8.136,-2.798,5.96e-5,***
+fallmod.2.sm,Object_TypeVegetation,-1.686,1.159,-1.455,-3.957,0.585,0.146,
+fallmod.2.sm,"poly(TwoVeg, 2)1",-10.012,4.842,-2.068,-19.501,-0.522,0.0387,*
+fallmod.2.sm,"poly(TwoVeg, 2)2",-2.937,4.094,-0.717,-10.961,5.087,0.473,
+fallmod.2.sm,Viewshed_sc,7.169,3.649,1.965,0.018,14.32,0.0494,*
+fallmod.1.fg,(Intercept),-3.485,3.693,-0.944,-10.723,3.753,0.345,
+fallmod.1.fg,Object_TypeNone,-5.589,1.389,-4.024,-8.311,-2.867,5.71e-5,***
+fallmod.1.fg,Object_TypeVegetation,-1.23,1.197,-1.027,-3.575,1.116,0.304,
+fallmod.1.fg,"poly(Pioneer_Stabilizers, 2)1",-28.964,24.138,-1.2,-76.274,18.346,0.23,
+fallmod.1.fg,"poly(Pioneer_Stabilizers, 2)2",-26.233,16.742,-1.567,-59.046,6.579,0.117,
+fallmod.1.fg,Pioneer_Builders,-0.264,0.108,-2.431,-0.476,-0.051,0.015,*
+fallmod.1.fg,Viewshed_sc,7.101,4.005,1.773,-0.749,14.951,0.0762,.
+fallmod.3.fg,(Intercept),3.008,1.278,2.354,0.503,5.512,0.0186,*
+fallmod.3.fg,Object_TypeNone,-5.218,1.3,-4.013,-7.767,-2.669,6e-5,***
+fallmod.3.fg,Object_TypeVegetation,-1.174,1.174,-1,-3.475,1.127,0.317,
+fallmod.3.fg,"poly(Pioneer_Stabilizers, 2)1",-21.811,20.026,-1.089,-61.061,17.439,0.276,
+fallmod.3.fg,"poly(Pioneer_Stabilizers, 2)2",-19.953,14.731,-1.355,-48.825,8.919,0.176,
+fallmod.3.fg,Pioneer_Builders,-0.292,0.109,-2.687,-0.504,-0.079,0.00721,**
+fallmod.2.is,(Intercept),2.512,1.225,2.052,0.112,4.913,0.0402,*
+fallmod.2.is,Object_TypeNone,-5.563,1.368,-4.067,-8.244,-2.882,4.77e-5,***
+fallmod.2.is,Object_TypeVegetation,-1.884,1.185,-1.59,-4.207,0.438,0.112,
+fallmod.2.is,IP,1.616,0.613,2.636,0.415,2.818,0.00838,**
+fallmod.2.is,"poly(BS, 2)1",-16.523,17.46,-0.946,-50.744,17.698,0.344,
+fallmod.2.is,"poly(BS, 2)2",-18.007,12.937,-1.392,-43.363,7.349,0.164,
+fallmod.2.is,SR,-0.204,0.107,-1.905,-0.414,0.006,0.0567,.
+fallmod.3.is,(Intercept),-3.887,3.632,-1.07,-11.006,3.231,0.284,
+fallmod.3.is,Object_TypeNone,-5.587,1.366,-4.09,-8.264,-2.909,4.32e-5,***
+fallmod.3.is,Object_TypeVegetation,-1.773,1.165,-1.521,-4.057,0.511,0.128,
+fallmod.3.is,IP,1.326,0.584,2.268,0.18,2.471,0.0233,*
+fallmod.3.is,"poly(BS, 2)1",-19.671,18.302,-1.075,-55.542,16.2,0.282,
+fallmod.3.is,"poly(BS, 2)2",-17.859,13.443,-1.328,-44.207,8.489,0.184,
+fallmod.3.is,Viewshed_sc,6.377,3.952,1.614,-1.369,14.123,0.107,
