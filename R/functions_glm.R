@@ -154,3 +154,53 @@ make_row_label <- function(label_text, width = 10) {
     ) +
     theme_void()
 }
+
+# Create model results tables
+tidy_mod_table <- function(model_list) {
+  
+  # Helper function to add significance stars
+  add_sig_stars <- function(p) {
+    case_when(
+      p < 0.001 ~ "***",
+      p < 0.01  ~ "**",
+      p < 0.05  ~ "*",
+      p < 0.1   ~ ".",
+      TRUE      ~ ""
+    )
+  }
+  
+  tidy_list <- map(names(model_list), function(mod_name) {
+    broom.mixed::tidy(
+      model_list[[mod_name]],
+      effects = "fixed",
+      conf.int = TRUE,
+      conf.level = 0.95,
+      exponentiate = FALSE  # keep log-odds
+    ) %>%
+      filter(effect == "fixed") %>%
+      mutate(
+        Model = mod_name,
+        Estimate = round(estimate, 3),
+        Std.Error = round(std.error, 3),
+        z = round(statistic, 3),
+        `p-value` = signif(p.value, 3),
+        Low_CI = round(conf.low, 3),
+        High_CI = round(conf.high, 3),
+        Sig = add_sig_stars(p.value)
+      ) %>%
+      select(
+        Model,
+        Term = term,
+        Estimate,
+        Std.Error,
+        z,
+        Low_CI,
+        High_CI,
+        `p-value`,
+        Sig
+      )
+  })
+  
+  combined <- bind_rows(tidy_list)
+  return(combined)
+}

@@ -839,3 +839,39 @@ cand.mods.all.3groups <- dplyr::bind_rows(
 )
 
 write_csv(cand.mods.all.3groups, "tables/Candidate_Models_AllSubsets_3Groups.csv")
+
+# Create model results tables
+# results for all "selected" models 
+
+#create list of selected models - all data
+selectmods.alldata <- list(
+  fullmod.1.sm = fullmod.1.sm,
+  fullmod.1.fg = fullmod.1.fg,
+  fullmod.2.is = fullmod.2.is
+)
+
+modresults.alldata <- tidy_mod_table(selectmods.alldata)
+write_csv(modresults.alldata, "tables/ModelResultsTable_AllData.csv")
+
+#create list of selected models - summer data
+selectmods.summerdata <- list(
+  summermod.1.sm = summermod.1.sm,
+  summermod.2.fg = summermod.2.fg,
+  summermod.1.is = summermod.1.is
+)
+
+modresults.summerdata <- tidy_mod_table(selectmods.summerdata)
+write_csv(modresults.summerdata, "tables/ModelResultsTable_SummerData.csv")
+
+#create list of selected models - fall data
+selectmods.falldata <- list(
+  fallmod.2.sm = fallmod.2.sm,
+  fallmod.1.fg = fallmod.1.fg,
+  fallmod.3.fg = fallmod.3.fg,
+  fallmod.2.is = fallmod.2.is,
+  fallmod.3.is = fallmod.3.is
+)
+
+modresults.falldata <- tidy_mod_table(selectmods.falldata)
+write_csv(modresults.falldata, "tables/ModelResultsTable_FallData.csv")
+
