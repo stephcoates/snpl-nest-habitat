@@ -209,17 +209,6 @@ PB_cover <- ggplot(new_data, aes(x = Pioneer_Builders, y = predicted_prob, color
 print(PB_cover) 
 
 
-
-
-
-
-
-
-
-
-
-
-
 # 1.c. All data - Individual Species ----
 
 # rename selected model and use glm for "predict" function later
@@ -281,8 +270,8 @@ range <- all_df %>%
 # and separate rows for each level of `Object_Type`
 new_data <- expand.grid(
   SR = seq(min(all_df$SR, na.rm = TRUE), 
-                         max(all_df$SR, na.rm = TRUE), 
-                         length.out = 100),
+           max(all_df$SR, na.rm = TRUE), 
+           length.out = 100),
   BS = mean(all_df$BS, na.rm = TRUE),
   IP = mean(all_df$IP, na.rm = TRUE),
   Object_Type = c("None", "Vegetation", "Non-veg wood or shell")
@@ -363,16 +352,6 @@ IP_cover <- ggplot(new_data, aes(x = IP, y = predicted_prob, color = Object_Type
 print(IP_cover) 
 
 
-
-
-
-
-
-
-
-
-
-
 # 1.d. Facet Plot for All Data ----
 
 # Remove legends and apply correct titles/axis labels
@@ -382,27 +361,27 @@ TwoVegp <- TwoVeg_cover + theme(legend.position = "none",
                                 axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(a) Vegetative cover in 2 m radius", x = "Percent cover in 2 m radius", 
+  labs(title = "(a) Veg cover 2 m", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 Halfp <- Half_cover + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(b) Vegetative cover in 0.5 m radius", 
-       x = "Percent cover in 0.5 m radius")
+  labs(title = "(b) Total cover 0.5 m", 
+       x = "% cover in 0.5 m radius")
 
 PSp <- PS_cover + theme(legend.position = "none", 
                         plot.title = element_text(size = 11), 
                         axis.title.x = element_text(size = 10), 
                         axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
-  labs(title = "(a) Pioneer stabilizers", x = "Percent cover in 2 m radius", 
+  labs(title = "(c) Pioneer stabilizers", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 PBp <- PB_cover + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(b) Pioneer builders", x = "Percent cover in 2 m radius", 
+  labs(title = "(d) Pioneer builders", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 BSp <- BS_cover + theme(legend.position = "none", 
@@ -411,19 +390,19 @@ BSp <- BS_cover + theme(legend.position = "none",
                         axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(a) Beach bur sage", x = "Percent cover in 2 m radius", 
+  labs(title = "(e) Beach bur sage", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 SRp <- SR_cover + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(b) Sea rocket", x = "Percent cover in 2 m radius", 
+  labs(title = "(f) Sea rocket", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 IPp <- IP_cover + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(c) Dead ice plant", x = "Percent cover in 2 m radius", 
+  labs(title = "(g) Dead ice plant", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 
@@ -474,30 +453,9 @@ legend_row <- plot_grid(legend, nrow = 1)
 facet_alldata_3groups <- plot_grid(top_row, middle_row, bottom_row, legend_row, ncol = 1, rel_heights = c(1,1,1,0.2))
 
 # Display
-print(final_plot)
+print(facet_alldata_3groups)
 
 ggsave("fig/facet_alldata_3groups.jpg", plot = facet_alldata_3groups, width = 170, height = 170, units = "mm", dpi = 300) #adjust size as needed
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # 2.a. Summer subset - Summarized Microhabitat ----
@@ -531,7 +489,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-TwoVeg_cover <- ggplot(new_data, aes(x = TwoVeg, y = predicted_prob, color = Object_Type)) +
+TwoVeg_cover.summer <- ggplot(new_data, aes(x = TwoVeg, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -545,7 +503,7 @@ TwoVeg_cover <- ggplot(new_data, aes(x = TwoVeg, y = predicted_prob, color = Obj
   xlim(range$min_TwoVeg, range$max_TwoVeg)
 
 # Display the plot
-print(TwoVeg_cover) 
+print(TwoVeg_cover.summer) 
 
 # Plot covariate - Half
 range <- summer_df %>%
@@ -572,7 +530,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-Half_cover <- ggplot(new_data, aes(x = Half, y = predicted_prob, color = Object_Type)) +
+Half_cover.summer <- ggplot(new_data, aes(x = Half, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -586,7 +544,7 @@ Half_cover <- ggplot(new_data, aes(x = Half, y = predicted_prob, color = Object_
   xlim(range$min_Half, range$max_Half)
 
 # Display the plot
-print(Half_cover) 
+print(Half_cover.summer) 
 
 
 # 2.b. Summer subset - Functional Groups ----
@@ -622,7 +580,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-PS_cover <- ggplot(new_data, aes(x = Pioneer_Stabilizers, y = predicted_prob, color = Object_Type)) +
+PS_cover.summer <- ggplot(new_data, aes(x = Pioneer_Stabilizers, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -636,7 +594,8 @@ PS_cover <- ggplot(new_data, aes(x = Pioneer_Stabilizers, y = predicted_prob, co
   xlim(range$min_PS, range$max_PS)
 
 # Display the plot
-print(PS_cover) 
+print(PS_cover.summer) 
+
 
 # 2.c. Summer subset - Individual Species ----
 
@@ -671,7 +630,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-BS_cover <- ggplot(new_data, aes(x = BS, y = predicted_prob, color = Object_Type)) +
+BS_cover.summer <- ggplot(new_data, aes(x = BS, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -685,7 +644,7 @@ BS_cover <- ggplot(new_data, aes(x = BS, y = predicted_prob, color = Object_Type
   xlim(range$min_BS, range$max_BS)
 
 # Display the plot
-print(BS_cover) 
+print(BS_cover.summer) 
 
 
 # Plot covariate - SR
@@ -716,7 +675,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-SR_cover <- ggplot(new_data, aes(x = SR, y = predicted_prob, color = Object_Type)) +
+SR_cover.summer <- ggplot(new_data, aes(x = SR, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -730,47 +689,47 @@ SR_cover <- ggplot(new_data, aes(x = SR, y = predicted_prob, color = Object_Type
   xlim(range$min_SR, range$max_SR)
 
 # Display the plot
-print(SR_cover) 
+print(SR_cover.summer) 
 
 # 2.d. Facet Plot for Summer subset ----
 
 # Remove legends and apply correct titles/axis labels
-TwoVegp <- TwoVeg_cover + theme(legend.position = "none",
+TwoVegp <- TwoVeg_cover.summer + theme(legend.position = "none",
                                 plot.title = element_text(size = 11),
                                 axis.title.x = element_text(size = 10), 
                                 axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(a) Vegetative cover in 2 m radius", x = "Percent cover in 2 m radius", 
+  labs(title = "(a) Veg cover 2 m", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
-Halfp <- Half_cover + theme(legend.position = "none") +
+Halfp <- Half_cover.summer + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(b) Vegetative cover in 0.5 m radius", 
-       x = "Percent cover in 0.5 m radius")
+  labs(title = "(b) Total cover 0.5 m", 
+       x = "% cover in 0.5 m radius")
 
-PSp <- PS_cover + theme(legend.position = "none", 
+PSp <- PS_cover.summer + theme(legend.position = "none", 
                         plot.title = element_text(size = 11), 
                         axis.title.x = element_text(size = 10), 
                         axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
-  labs(title = "(a) Pioneer stabilizers", x = "Percent cover in 2 m radius", 
+  labs(title = "(c) Pioneer stabilizers", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
-BSp <- BS_cover + theme(legend.position = "none", 
+BSp <- BS_cover.summer + theme(legend.position = "none", 
                         plot.title = element_text(size = 11), 
                         axis.title.x = element_text(size = 10), 
                         axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(a) Beach bur sage", x = "Percent cover in 2 m radius", 
+  labs(title = "(d) Beach bur sage", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
-SRp <- SR_cover + theme(legend.position = "none") +
+SRp <- SR_cover.summer + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(b) Sea rocket", x = "Percent cover in 2 m radius", 
+  labs(title = "(e) Sea rocket", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 # Extract single legend before removing it from the plot
@@ -796,21 +755,21 @@ label_bottom <- make_row_label("Individual Species")
 # Example top row: label + plots
 top_row <- plot_grid(
   label_top,
-  plot_grid(TwoVegp, Halfp, nrow = 1, rel_widths = c(1,1)),
+  plot_grid(TwoVegp, Halfp, empty_plot, nrow = 1, rel_widths = c(1,1,1)),
   ncol = 2,
   rel_widths = c(0.05, 0.95)  # narrow label, wide plots
 )
 
 middle_row <- plot_grid(
   label_middle,
-  plot_grid(PSp, empty_plot, nrow = 1, rel_widths = c(1,1)),
+  plot_grid(PSp, empty_plot, empty_plot, nrow = 1, rel_widths = c(1,1,1)),
   ncol = 2,
   rel_widths = c(0.05, 0.95)
 )
 
 bottom_row <- plot_grid(
   label_bottom,
-  plot_grid(BSp, SRp, nrow = 1, rel_widths = c(1,1)),
+  plot_grid(BSp, SRp, empty_plot, nrow = 1, rel_widths = c(1,1,1)),
   ncol = 2,
   rel_widths = c(0.05, 0.95)
 )
@@ -823,28 +782,6 @@ facet_summerdata_3groups <- plot_grid(top_row, middle_row, bottom_row, legend_ro
 print(facet_summerdata_3groups)
 
 ggsave("fig/facet_summerdata_3groups.jpg", plot = facet_summerdata_3groups, width = 170, height = 170, units = "mm", dpi = 300) #adjust size as needed
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # 3.a. Fall data - Summarized Microhabitat ----
@@ -879,7 +816,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-TwoVeg_cover <- ggplot(new_data, aes(x = TwoVeg, y = predicted_prob, color = Object_Type)) +
+TwoVeg_cover.fall <- ggplot(new_data, aes(x = TwoVeg, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -893,7 +830,7 @@ TwoVeg_cover <- ggplot(new_data, aes(x = TwoVeg, y = predicted_prob, color = Obj
   xlim(range$min_TwoVeg, range$max_TwoVeg)
 
 # Display the plot
-print(TwoVeg_cover) 
+print(TwoVeg_cover.fall) 
 
 # Plot covariate - Viewshed_sc
 range <- fall_df %>%
@@ -920,7 +857,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-View_sm <- ggplot(new_data, aes(x = Viewshed_sc, y = predicted_prob, color = Object_Type)) +
+View_sm.fall <- ggplot(new_data, aes(x = Viewshed_sc, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -934,7 +871,7 @@ View_sm <- ggplot(new_data, aes(x = Viewshed_sc, y = predicted_prob, color = Obj
   xlim(range$min_View, range$max_View)
 
 # Display the plot
-print(View_sm) 
+print(View_sm.fall) 
 
 
 # 3.b. Fall data - Functional Groups ----
@@ -973,7 +910,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-PS_cover <- ggplot(new_data, aes(x = Pioneer_Stabilizers, y = predicted_prob, color = Object_Type)) +
+PS_cover.fall <- ggplot(new_data, aes(x = Pioneer_Stabilizers, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -987,7 +924,7 @@ PS_cover <- ggplot(new_data, aes(x = Pioneer_Stabilizers, y = predicted_prob, co
   xlim(range$min_PS, range$max_PS)
 
 # Display the plot
-print(PS_cover) 
+print(PS_cover.fall) 
 
 # Plot covariate - Pioneer Builders
 range <- fall_df %>%
@@ -1018,7 +955,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-PB_cover <- ggplot(new_data, aes(x = Pioneer_Builders, y = predicted_prob, color = Object_Type)) +
+PB_cover.fall <- ggplot(new_data, aes(x = Pioneer_Builders, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -1032,7 +969,7 @@ PB_cover <- ggplot(new_data, aes(x = Pioneer_Builders, y = predicted_prob, color
   xlim(range$min_PB, range$max_PB)
 
 # Display the plot
-print(PB_cover) 
+print(PB_cover.fall) 
 
 
 # Plot covariate - Viewshed
@@ -1064,7 +1001,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-View_fg <- ggplot(new_data, aes(x = Viewshed_sc, y = predicted_prob, color = Object_Type)) +
+View_fg.fall <- ggplot(new_data, aes(x = Viewshed_sc, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -1078,15 +1015,7 @@ View_fg <- ggplot(new_data, aes(x = Viewshed_sc, y = predicted_prob, color = Obj
   xlim(range$min_View, range$max_View)
 
 # Display the plot
-print(View_fg) 
-
-
-
-
-
-
-
-
+print(View_fg.fall) 
 
 
 # 3.c. Fall data - Individual Species ----
@@ -1123,7 +1052,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-BS_cover <- ggplot(new_data, aes(x = BS, y = predicted_prob, color = Object_Type)) +
+BS_cover.fall <- ggplot(new_data, aes(x = BS, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -1137,7 +1066,7 @@ BS_cover <- ggplot(new_data, aes(x = BS, y = predicted_prob, color = Object_Type
   xlim(range$min_BS, range$max_BS)
 
 # Display the plot
-print(BS_cover) 
+print(BS_cover.fall) 
 
 
 # Plot covariate - SR
@@ -1169,7 +1098,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-SR_cover <- ggplot(new_data, aes(x = SR, y = predicted_prob, color = Object_Type)) +
+SR_cover.fall <- ggplot(new_data, aes(x = SR, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -1183,7 +1112,7 @@ SR_cover <- ggplot(new_data, aes(x = SR, y = predicted_prob, color = Object_Type
   xlim(range$min_SR, range$max_SR)
 
 # Display the plot
-print(SR_cover) 
+print(SR_cover.fall) 
 
 
 # Plot covariate - IP
@@ -1215,7 +1144,7 @@ new_data$lower_ci <- plogis(predictions$fit - 1.96 * predictions$se.fit)
 new_data$upper_ci <- plogis(predictions$fit + 1.96 * predictions$se.fit)
 
 # Plot using ggplot2 with confidence intervals as a ribbon
-IP_cover <- ggplot(new_data, aes(x = IP, y = predicted_prob, color = Object_Type)) +
+IP_cover.fall <- ggplot(new_data, aes(x = IP, y = predicted_prob, color = Object_Type)) +
   geom_line() +
   geom_ribbon(aes(ymin = lower_ci, ymax = upper_ci, fill = Object_Type), color = NA, alpha = 0.3) +
   labs(
@@ -1229,67 +1158,66 @@ IP_cover <- ggplot(new_data, aes(x = IP, y = predicted_prob, color = Object_Type
   xlim(range$min_IP, range$max_IP)
 
 # Display the plot
-print(IP_cover) 
-
+print(IP_cover.fall) 
 
 
 # 3.d. Facet Plot for Fall Data ----
 
 # Remove legends and apply correct titles/axis labels
-TwoVegp <- TwoVeg_cover + theme(legend.position = "none",
+TwoVegp <- TwoVeg_cover.fall + theme(legend.position = "none",
                                 plot.title = element_text(size = 11),
                                 axis.title.x = element_text(size = 10), 
                                 axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(a) Vegetative cover in 2 m radius", x = "Percent cover in 2 m radius", 
+  labs(title = "(a) Veg cover 2 m", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
-Viewsmp <- View_sm + theme(legend.position = "none") +
+Viewsmp <- View_sm.fall + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
   labs(title = "(b) Viewshed", 
-       x = "Proportion open view from nest")
+       x = "Proportion open viewshed")
 
-PSp <- PS_cover + theme(legend.position = "none", 
+PSp <- PS_cover.fall + theme(legend.position = "none", 
                         plot.title = element_text(size = 11), 
                         axis.title.x = element_text(size = 10), 
                         axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
-  labs(title = "(a) Pioneer stabilizers", x = "Percent cover in 2 m radius", 
+  labs(title = "(c) Pioneer stabilizers", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
-PBp <- PB_cover + theme(legend.position = "none") +
+PBp <- PB_cover.fall + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(b) Pioneer builders", x = "Percent cover in 2 m radius", 
+  labs(title = "(d) Pioneer builders", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
-Viewfgp <- View_fg + theme(legend.position = "none") +
+Viewfgp <- View_fg.fall + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(c) Viewshed", 
-       x = "Proportion open view from nest")
+  labs(title = "(e) Viewshed", 
+       x = "Proportion open viewshed")
 
-BSp <- BS_cover + theme(legend.position = "none", 
+BSp <- BS_cover.fall + theme(legend.position = "none", 
                         plot.title = element_text(size = 11), 
                         axis.title.x = element_text(size = 10), 
                         axis.title.y = element_text(size = 10)) +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(a) Beach bur sage", x = "Percent cover in 2 m radius", 
+  labs(title = "(f) Beach bur sage", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
-SRp <- SR_cover + theme(legend.position = "none") +
+SRp <- SR_cover.fall + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(b) Sea rocket", x = "Percent cover in 2 m radius", 
+  labs(title = "(g) Sea rocket", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 IPp <- IP_cover + theme(legend.position = "none") +
   scale_color_grey() + scale_fill_grey() +
   font_theme + 
-  labs(title = "(c) Dead ice plant", x = "Percent cover in 2 m radius", 
+  labs(title = "(h) Dead ice plant", x = "% cover in 2 m radius", 
        y = "Probability of nest")
 
 
@@ -1316,7 +1244,7 @@ label_bottom <- make_row_label("Individual Species")
 # Example top row: label + plots
 top_row <- plot_grid(
   label_top,
-  plot_grid(TwoVegp, Halfp, Viewsmp, nrow = 1, rel_widths = c(1,1,1)),
+  plot_grid(TwoVegp, Viewsmp, empty_plot, nrow = 1, rel_widths = c(1,1,1)),
   ncol = 2,
   rel_widths = c(0.05, 0.95)  # narrow label, wide plots
 )
