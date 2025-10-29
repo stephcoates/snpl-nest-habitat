@@ -14,10 +14,10 @@ nmds <- function(data, title, k=2, labelpoints=FALSE) {
   
   # Add Group labels for plotting
   groups <- case_when(
-    grepl("^SN", rownames(subset_data)) ~ "Breeding season nest site",
-    grepl("^FN", rownames(subset_data)) ~ "Fall nest site",
-    grepl("^SP", rownames(subset_data)) ~ "Breeding season random point",
-    grepl("^FP", rownames(subset_data)) ~ "Fall random point",
+    grepl("^SN", rownames(subset_data)) ~ "Breeding Season Nest Site",
+    grepl("^FN", rownames(subset_data)) ~ "Fall Nest Site",
+    grepl("^SP", rownames(subset_data)) ~ "Breeding Season Random Point",
+    grepl("^FP", rownames(subset_data)) ~ "Fall Random Point",
     TRUE ~ NA_character_
   )
   
@@ -68,7 +68,7 @@ nmds <- function(data, title, k=2, labelpoints=FALSE) {
     labs(title = title, x = "NMDS1", y = "NMDS2", fontsize = 10) +
     # Shapes
     scale_shape_manual(
-      values = c("Breeding Season Nest" = 16, "Fall Nest" = 10,
+      values = c("Breeding Season Nest Site" = 16, "Fall Nest Site" = 10,
                  "Breeding Season Random Point" = 15, "Fall Random Point" = 12)
     ) +
     # Unified color + fill scale
@@ -85,8 +85,8 @@ nmds <- function(data, title, k=2, labelpoints=FALSE) {
     scale_fill_manual(
       name = "Group",  # same name to merge legend
       values = c(
-        "Breeding Season Nest" = "#0072B2",
-        "Fall Nest" = "#009E73",
+        "Breeding Season Nest Site" = "#0072B2",
+        "Fall Nest Site" = "#009E73",
         "Breeding Season Random Point" = "#D55E00",
         "Fall Random Point" = "#E69F00"
       )
