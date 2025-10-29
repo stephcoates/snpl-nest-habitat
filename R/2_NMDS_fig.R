@@ -59,4 +59,4 @@ final_plot <- ggdraw() +
 print(final_plot)
 
 # Save to size formatted for Wader Study
-ggsave(finlename = "fig/NMDS_facet.png", final_plot, width = 170, height = 170, units = "mm", dpi = 300) 
+ggsave("fig/NMDS_facet.png", final_plot, width = 170, height = 170, units = "mm", dpi = 300) 

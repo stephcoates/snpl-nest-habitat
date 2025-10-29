@@ -1,4 +1,4 @@
-# RUN NMDS ANALYSIS 
+# RUN NMDS ANALYSIS
 # Compare nests and random points in breeding season and post-breeding fall
 
 # load packages and functions
