@@ -21,4 +21,4 @@ Known limiations/issues...
 # Contact
 Stephanie Coates - scoates@pointblue.org
 Alice Voulfson - alice.voulfson@gmail.com
-A line I wrote on my local computer  
+
