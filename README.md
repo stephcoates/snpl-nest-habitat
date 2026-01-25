@@ -21,3 +21,4 @@ Known limiations/issues...
 # Contact
 Stephanie Coates - scoates@pointblue.org
 Alice Voulfson - alice.voulfson@gmail.com
+George Cummins - gcummins@pointblue.org 
