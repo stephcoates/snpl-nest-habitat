@@ -16,8 +16,8 @@ p_a <- mynmds_plot_with_pvalue_nv +
     plot.margin = margin(t = 5, r = 5, b = 5, l = 5)
   )
 
-p_b <- mynmds_plot_with_pvalue_sp0 +
-  labs(title = NULL, subtitle = "(b) Individual cover type") +
+p_b <- mynmds_plot_with_pvalue_fg +
+  labs(title = NULL, subtitle = "(b) Functional groups") +
   theme_classic() +
   theme(
     legend.position = "none",
@@ -25,14 +25,15 @@ p_b <- mynmds_plot_with_pvalue_sp0 +
     plot.margin = margin(t = 5, r = 5, b = 5, l = 5)
   )
 
-p_c <- mynmds_plot_with_pvalue_fg +
-  labs(title = NULL, subtitle = "(c) Functional groups") +
+p_c <- mynmds_plot_with_pvalue_sp0 +
+  labs(title = NULL, subtitle = "(c) Individual cover type") +
   theme_classic() +
   theme(
     legend.position = "none",
     plot.subtitle = element_text(size = 11, hjust = 0, margin = margin(t=0, r=0, b=5, l=0)),
     plot.margin = margin(t = 5, r = 5, b = 5, l = 5)
   )
+
 
 # Extract legend (small text)
 legend <- get_legend(
