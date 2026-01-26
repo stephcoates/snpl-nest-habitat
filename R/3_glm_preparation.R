@@ -144,5 +144,5 @@ corr_matrix1.fall <- cor(hab_corr_df1.fall)
 # Calculate correlation between all pioneers (builders and stabilizers) and TwoVeg
 all_df <- all_df %>% 
   mutate(pioneers = Pioneer_Builders + Pioneer_Stabilizers)
-cor.test(all_df2$pioneers, all_df2$TwoVeg)
+cor.test(all_df$pioneers, all_df$TwoVeg)
 
