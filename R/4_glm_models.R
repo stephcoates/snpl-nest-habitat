@@ -875,3 +875,69 @@ selectmods.falldata <- list(
 modresults.falldata <- tidy_mod_table(selectmods.falldata)
 write_csv(modresults.falldata, "tables/ModelResultsTable_FallData.csv")
 
+# Interpretation help: get outputs for making odds ratio comparisons between object types ----
+# Get pairwise contrasts on the log-odds scale
+emm <- emmeans(fullmod.1.sm, ~Object_Type)
+pw <- contrast(
+  emm,
+  method = "pairwise",
+  adjust = "none"
+)
+
+# Convert emmeans pairwise contrasts to a summary table with OR, 95% CI, and p-values
+# Turn into a tidy table and compute OR + 95% CI. 
+tab <- as.data.frame(pw) %>%
+  mutate(
+    # Odds ratio and CI from log-odds (estimate) and SE
+    OR      = exp(estimate),
+    CI_low  = exp(estimate - 1.96 * SE),
+    CI_high = exp(estimate + 1.96 * SE),
+    
+    # Clean p-value formatting 
+    p_value = ifelse(p.value < 1e-4, "<0.0001", sprintf("%.4f", p.value)),
+    
+    # Make a nicer comparison label
+    Comparison = contrast %>%
+      str_replace_all("\\(", "") %>%
+      str_replace_all("\\)", "") %>%
+      str_replace_all("\\s+", " ") %>%
+      str_replace(" - ", " vs ")
+  ) %>%
+  select(Comparison, OR, CI_low, CI_high, p_value) %>%
+  mutate(
+    OR = round(OR, 2),
+    CI_low = round(CI_low, 2),
+    CI_high = round(CI_high, 2),
+    `95% CI` = paste0(CI_low, "–", CI_high)
+  ) %>%
+  select(Comparison, OR, `95% CI`, p_value)
+
+# make final table
+tab_final <- bind_rows(
+  tab %>% filter(Comparison != "None vs Vegetation"),
+  tab %>% filter(Comparison == "None vs Vegetation") %>%
+    mutate(
+      Comparison = "Vegetation vs None",
+      OR = round(1 / OR, 2),
+      # Recompute CI by swapping/inverting the bounds:
+      `95% CI` = {
+        # pull original CI numbers back out
+        parts <- str_split_fixed(`95% CI`, "–", 2)
+        lo <- as.numeric(parts[,1]); hi <- as.numeric(parts[,2])
+        paste0(round(1 / hi, 2), "–", round(1 / lo, 2))
+      }
+    ) %>%
+    select(Comparison, OR, `95% CI`, p_value)
+) %>%
+  mutate(Comparison = factor(
+    Comparison,
+    levels = c(
+      "Non-veg Wood or Shell vs Vegetation",
+      "Non-veg Wood or Shell vs None",
+      "Vegetation vs None"
+    )
+  )) %>%
+  arrange(Comparison) %>%
+  mutate(Comparison = as.character(Comparison))
+
+tab_final
