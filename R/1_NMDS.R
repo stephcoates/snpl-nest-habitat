@@ -39,10 +39,10 @@ nmdsdata_nv <- alldata %>%
   select(Half:Sand, Viewshed,NonVeg) %>% select(-Sand)
 # Create a grouping variable
 groups_nv <- case_when(
-  grepl("^SN", rownames(nmdsdata_nv)) ~ "Summer Nest",
-  grepl("^FN", rownames(nmdsdata_nv)) ~ "Fall Nest",
-  grepl("^SP", rownames(nmdsdata_nv)) ~ "Summer Point",
-  grepl("^FP", rownames(nmdsdata_nv)) ~ "Fall Point",
+  grepl("^SN", rownames(nmdsdata_nv)) ~ "Breeding Season Nest Site",
+  grepl("^FN", rownames(nmdsdata_nv)) ~ "Fall Nest Site",
+  grepl("^SP", rownames(nmdsdata_nv)) ~ "Breeding Season Random Point",
+  grepl("^FP", rownames(nmdsdata_nv)) ~ "Fall Random Point",
   TRUE ~ NA_character_
 )
 
@@ -115,10 +115,10 @@ nmdsdata_fg <- nmdsdata_fg %>% filter(sum!=0) %>% select(-sum) #gets rid of 9 po
 
 # Create a grouping variable
 groups_fg <- case_when(
-  grepl("^SN", rownames(nmdsdata_fg)) ~ "Summer Nest",
-  grepl("^FN", rownames(nmdsdata_fg)) ~ "Fall Nest",
-  grepl("^SP", rownames(nmdsdata_fg)) ~ "Summer Point",
-  grepl("^FP", rownames(nmdsdata_fg)) ~ "Fall Point",
+  grepl("^SN", rownames(nmdsdata_fg)) ~ "Breeding Season Nest Site",
+  grepl("^FN", rownames(nmdsdata_fg)) ~ "Fall Nest Site",
+  grepl("^SP", rownames(nmdsdata_fg)) ~ "Breeding Season Random Point",
+  grepl("^FP", rownames(nmdsdata_fg)) ~ "Fall Random Point",
   TRUE ~ NA_character_
 )
 
@@ -182,10 +182,10 @@ nmdsdata_sp0 <- nmdsdata_sp0 %>% filter(sum!=0) %>% select(-sum) #gets rid of 9 
 
 # Create a grouping variable
 groups_sp0 <- case_when(
-  grepl("^SN", rownames(nmdsdata_sp0)) ~ "Summer Nest",
-  grepl("^FN", rownames(nmdsdata_sp0)) ~ "Fall Nest",
-  grepl("^SP", rownames(nmdsdata_sp0)) ~ "Summer Point",
-  grepl("^FP", rownames(nmdsdata_sp0)) ~ "Fall Point",
+  grepl("^SN", rownames(nmdsdata_sp0)) ~ "Breeding Season Nest Site",
+  grepl("^FN", rownames(nmdsdata_sp0)) ~ "Fall Nest Site",
+  grepl("^SP", rownames(nmdsdata_sp0)) ~ "Breeding Season Random Point",
+  grepl("^FP", rownames(nmdsdata_sp0)) ~ "Fall Random Point",
   TRUE ~ NA_character_
 )
 
