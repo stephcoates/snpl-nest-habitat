@@ -19,6 +19,6 @@ Our data is split into four different point types: nest sites surveyed during th
 Known limiations/issues...
 
 # Contact
-Stephanie Coates - scoates@pointblue.org
-Alice Voulfson - alice.voulfson@gmail.com
-George Cummins - gcummins@pointblue.org 
+Alice Voulfson - alice.voulfson@gmail.com (Point Blue)
+Stephanie Coates - scoates@pointblue.org (Point Blue)
+George Cummins - gcummins@pointblue.org (Point Blue)
