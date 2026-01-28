@@ -1,0 +1,38 @@
+Metadata for SNPL_nest_habitat_CLEAN(in) (1).csv. ,
+,
+ID,Unique ID given to nest or random point. 
+Type,Type of point. Nest point or random point. 
+Collection Period,"For nests in the breeding season, identifies whether data was collected the date the nest was found, within the (estimated) hatch date, or after hatch. "
+Fate,"Nest fate: hatch, fail, or unknown. "
+Date,Date of sample collection. 
+Season,Season of collection: summer (nesting season) or fall (after nesting season has ended). 
+Latitude,"Geographic latitude in decimal degrees. Positive values are North, negative are South. Range: -90.0 to 90.0."
+Longitude,"Geographic longitude in decimal degrees. Positive values are East, negative are West. Range: -180.0 to 180.0"
+Spec,"Specified object: Presence or absence of a specific object (inanimate object, vegetation, or no object) at the nest cup within 15 cm."
+Half,Percent total cover in a 0.5 m radius. 
+Two,Percent total cover in a 2 m radius. 
+TwoVeg,Percent live vegetative cover out of all vegetative cover in a 2 m radius. 
+Live,Percent live vegetative cover in a 2 m radius. 
+DeadVegManual,Percent dead vegetative cover in a 2 m radius. 
+SR,Percent Sea Rocket Cakile maritima cover in a 2 m radius. 
+BP,Percent Beach Pea Lathyrus littoralis cover in a 2 m radius. 
+IP,Percent Ice Plant Carpobrotus spp. cover in a 2 m radius. 
+BS,Percent Beach Bur Sage Ambrosia chamissonis cover in a 2 m radius. 
+VE,Percent Verbena Abronia cover in a 2 m radius. 
+SG,Percent Salt Grass Distichlis spicata cover in a 2 m radius. 
+DG,Percent American Dune Grass Leymus mollis cover in a 2 m radius. 
+SH,Percent Sea Heath Frankenia salina cover in a 2 m radius. 
+SB,Percent Beach Saltbush Atriplex leucophylla cover in a 2 m radius. 
+PW,Percent Pickleweed Salicornia pacifica cover in a 2 m radius. 
+KE,Percent beach cast kelp cover in a 2 m radius. 
+VV,Percent Velella velella cover in a 2 m radius. 
+WO,Percent woody debris cover in a 2 m radius. 
+SL,Percent shell (> 3 cm) cover in a 2 m radius. 
+MI,Percent miscellaneous debris cover in a 2 m radius. 
+Viewshed,Visual estimate of degrees of unobstructed viewshed within a 20 m radius. 
+Pioneer_Builders,Percent Pioneer Builders cover in a 2 m radius. 
+Secondary_Stabilizers,Percent Secondary Stabilizers cover in a 2 m radius. 
+Secondary_Builders,Percent Secondary Builders cover in a 2 m radius. 
+Pioneer_Stabilizers,Percent Pioneer Stabilizers cover in a 2 m radius. 
+Tertiary_Stabilizers,Percent Tertiary Stabilizers cover in a 2 m radius. 
+NonVeg,Percent Nonvegetative cover in a 2 m radius. 
