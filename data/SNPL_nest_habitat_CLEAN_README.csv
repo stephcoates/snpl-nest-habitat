@@ -1,4 +1,4 @@
-Metadata for SNPL_nest_habitat_CLEAN(in) (1).csv. ,
+Metadata for SNPL_nest_habitat_CLEAN.csv. ,
 ,
 ID,Unique ID given to nest or random point. 
 Type,Type of point. Nest point or random point. 
@@ -35,4 +35,5 @@ Secondary_Stabilizers,Percent Secondary Stabilizers cover in a 2 m radius.
 Secondary_Builders,Percent Secondary Builders cover in a 2 m radius. 
 Pioneer_Stabilizers,Percent Pioneer Stabilizers cover in a 2 m radius. 
 Tertiary_Stabilizers,Percent Tertiary Stabilizers cover in a 2 m radius. 
+
 NonVeg,Percent Nonvegetative cover in a 2 m radius. 
