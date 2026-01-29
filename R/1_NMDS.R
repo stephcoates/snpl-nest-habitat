@@ -5,7 +5,8 @@
 source('R/packages.R')
 source('R/functions_NMDS.R')
 
-alldata <- read_csv('data/SNPL_nest_habitat.csv')
+#alldata <- read_csv('data/SNPL_nest_habitat.csv')
+alldata <- read_csv('data/SNPL_nest_habitat_clean.csv')
 
 # NMDS data preparation ----
 # add group type prefixes based on location type and season
@@ -20,23 +21,23 @@ alldata <- alldata %>%
 
 alldata <- alldata %>% mutate(Viewshed=Viewshed/360) #scaling viewshed to match other variables
 
-# NMDS analaysis ----
+## NMDS analaysis ----
 # Three covariate sets; each groups individual plant species differently
 # 1) summarized microhabitat
 # 2) dune plant functional groups
 # 3) individual plant species
 
 
-# 1. Summarized Microhabitat Ordination 
+## 1. Summarized Microhabitat Ordination 
 # comparing point location type and season by general percent cover 
 # categories such as total cover in a 2m radius, cover of dead vegetation
 
 # Remove outliers and unnecessary columns, then set row names
 nmdsdata_nv <- alldata %>%
-  select(-Two, -Dead, -DeadVeg, -TwoVeg) %>%  # Remove unwanted columns
+  #select(-Two, -Dead, -DeadVeg, -TwoVeg) %>%  # Remove unwanted columns
   rename(DeadVeg = DeadVegManual, LiveVeg = Live) %>% # Rename to match manuscript table
   column_to_rownames(var = "ID") %>%  # Set 'ID' as row names
-  select(Half:Sand, Viewshed,NonVeg) %>% select(-Sand)
+  select(Half:DeadVeg, Viewshed,NonVeg)
 # Create a grouping variable
 groups_nv <- case_when(
   grepl("^SN", rownames(nmdsdata_nv)) ~ "Breeding Season Nest Site",
@@ -60,6 +61,7 @@ stressplot(myresult_nv$nmds_result)
 myadonis_result_nv <- adonis2(nmdsdata_nv ~ groups_nv, data = data.frame(groups = groups_nv), permutations = 999)
 myadonis_result_nv
 # F=4.7653 and P=0.001
+# STC: F = 3.3868 and p = 0.006
 # pairwise permanova result
 mypairwise_results2_nv <- pairwise.adonis(nmdsdata_nv,groups_nv)
 mypairwise_results2_nv
@@ -69,6 +71,9 @@ mypairwise_results2_nv
 # fall nest and summer point p=0.006
 # fall nest and fall point p=0.012 #GCU would use this to compare nests and random points
 
+# STC: sig adjusted results after adding Two and TwoVeg back in:
+# summer nest and fall point p = 0.036
+
 # beta dispersion test
 d_nv <- vegdist(nmdsdata_nv, "bray")
 betadis_nv <- betadisper(d_nv,group = groups_nv) #negative eigenvalues are generated, I think we can ignore this
@@ -77,6 +82,11 @@ disp_result_nv <- permutest(betadis_nv) #tests if there are differences (non-hom
 disp_result_nv
 # F=3.6813 and P=0.014 with 999 permutations including negative eigenvalues
 # F=4.0987 and P=0.009 with 999 permutations, using add=TRUE to correct negative eigenvalues
+
+# STC: results after adding Two and TwoVeg back in:
+# F = 4.5748 and p = 0.007 with 999 permutations including negative eigenvalues
+# F = 5.3598 and p = 0.003 with 999 permutations, using add= TRUE to correct negative eigenvalues
+
 TukeyHSD(betadis_nv)
 # Significant or close to pairwise results for dispersion:
 # summer nest and fall points: P=0.015
@@ -84,6 +94,16 @@ TukeyHSD(betadis_nv)
 # Significant or close to pairwise results for dispersion WITH Corrected Eigenvalues:
 # summer nest and fall points: P=0.065
 # summer nest and summer points: 0.017
+
+# STC: Significant or close to pairwise results for dispersion after adding Two and TwoVeg back in:
+# summer nest and fall points: P=0.00506
+# summer nest and summer points: 0.03859
+
+# STC: Significant or close to pairwise results for dispersion WITH Corrected Eigenvalues after adding Two and TwoVeg back in:
+# summer nest and fall points: P=0.019
+# summer nest and summer points: p=0.009 #GCU would use this to compare nests and random points
+# fall nest and summer random point: p=0.04356
+# fall random point and fall nest: p = 0.0782
 
 # Print the NMDS plot with permanova p value
 mynmds_plot_with_pvalue_nv <- myresult_nv$plot +
@@ -98,13 +118,12 @@ mynmds_plot_with_pvalue_nv <- myresult_nv$plot +
         plot.subtitle = element_text(hjust = 0.5))  # Center subtitle
 mynmds_plot_with_pvalue_nv
 
-# 2. Functional Groups Ordination
+## 2. Functional Groups Ordination
 # comparing point location type and season based on species sorted into 
 # dune plant functional groups
 
 # Remove outliers and unnecessary columns, then set row names
 nmdsdata_fg <- alldata %>%
-  select(-Two, -Live, -Dead, -DeadVeg) %>%  # Remove unwanted columns
   column_to_rownames(var = "ID") %>%  # Set 'ID' as row names
   select(Pioneer_Builders:NonVeg) # Select relevant columns (just functional groups)
 
@@ -161,15 +180,14 @@ mynmds_plot_with_pvalue_fg <- myresult_fg$plot +
 mynmds_plot_with_pvalue_fg
 
 
-# 3. Individual Species Ordination
+## 3. Individual Species Ordination
 # comparing point location type and season based on individual plant species, 
 # not sorted into group
 
 # Remove outliers and unnecessary columns, then set row names
 nmdsdata_sp0 <- alldata %>%
-  select(-Two, -Live, -Dead, -DeadVeg) %>%  # Remove unwanted columns
   column_to_rownames(var = "ID") %>%  # Set 'ID' as row names
-  select(Sand:MI) %>% select(-Sand)  # Select relevant columns
+  select(SR:MI) # Select relevant columns, just individual species plus kelp, velella, etc.
 # If you want to run this with ONLY vegetation species cover, use this instead:
 # nmdsdata_sp0 <- alldata %>%
 #   select(-Two, -Live, -Dead, -DeadVeg) %>%  # Remove unwanted columns
