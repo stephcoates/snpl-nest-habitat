@@ -34,7 +34,7 @@ alldata <- alldata %>% mutate(Viewshed=Viewshed/360) #scaling viewshed to match 
 
 # Remove outliers and unnecessary columns, then set row names
 nmdsdata_nv <- alldata %>%
-  #select(-Two, -Dead, -DeadVeg, -TwoVeg) %>%  # Remove unwanted columns
+  select(-TwoVeg) %>%  # Remove unwanted columns, TwoVeg is essentially a duplicate of Two and LiveVeg
   rename(DeadVeg = DeadVegManual, LiveVeg = Live) %>% # Rename to match manuscript table
   column_to_rownames(var = "ID") %>%  # Set 'ID' as row names
   select(Half:DeadVeg, Viewshed,NonVeg)
@@ -61,7 +61,9 @@ stressplot(myresult_nv$nmds_result)
 myadonis_result_nv <- adonis2(nmdsdata_nv ~ groups_nv, data = data.frame(groups = groups_nv), permutations = 999)
 myadonis_result_nv
 # F=4.7653 and P=0.001
-# STC: F = 3.3868 and p = 0.006
+# STC: F = 3.3868 and p = 0.006 w/ Two and TwoVeg
+# STC: F = 3.732 and p = 0.002 w/ just Two
+
 # pairwise permanova result
 mypairwise_results2_nv <- pairwise.adonis(nmdsdata_nv,groups_nv)
 mypairwise_results2_nv
@@ -72,12 +74,16 @@ mypairwise_results2_nv
 # fall nest and fall point p=0.012 #GCU would use this to compare nests and random points
 
 # STC: sig adjusted results after adding Two and TwoVeg back in:
-# summer nest and fall point p = 0.036
+# summer nest and fall point p = 0.036 w/ Two and TwoVeg
+# STC: sig (and close) adjusted results after adding just Two back in:
+# summer nests and fall point p = 0.018
+# fall nest and fall point p = 0.054
+# fall nest and summer point p = 0.066
 
 # beta dispersion test
 d_nv <- vegdist(nmdsdata_nv, "bray")
 betadis_nv <- betadisper(d_nv,group = groups_nv) #negative eigenvalues are generated, I think we can ignore this
-# betadis_nv <- betadisper(d_nv,group = groups_nv, add = TRUE) #corrects for negative values are results are the same
+#betadis_nv <- betadisper(d_nv,group = groups_nv, add = TRUE) #corrects for negative values are results are the same
 disp_result_nv <- permutest(betadis_nv) #tests if there are differences (non-homogeneous dispersion between groups)
 disp_result_nv
 # F=3.6813 and P=0.014 with 999 permutations including negative eigenvalues
@@ -86,6 +92,10 @@ disp_result_nv
 # STC: results after adding Two and TwoVeg back in:
 # F = 4.5748 and p = 0.007 with 999 permutations including negative eigenvalues
 # F = 5.3598 and p = 0.003 with 999 permutations, using add= TRUE to correct negative eigenvalues
+
+# STC: results after adding just Two back in:
+# F = 4.4644 and p = 0.008 with 999 permutations including negative eigenvalues
+# F = 4.9661 and p = 0.003 with 999 permutations, using add= TRUE to correct negative eigenvalues
 
 TukeyHSD(betadis_nv)
 # Significant or close to pairwise results for dispersion:
@@ -99,11 +109,20 @@ TukeyHSD(betadis_nv)
 # summer nest and fall points: P=0.00506
 # summer nest and summer points: 0.03859
 
+# STC: Significant or close to pairwise results for dispersion after adding just Two back in:
+# summer nest and fall points: P=0.005901
+# summer nest and summer points: 0.036112
+
 # STC: Significant or close to pairwise results for dispersion WITH Corrected Eigenvalues after adding Two and TwoVeg back in:
 # summer nest and fall points: P=0.019
 # summer nest and summer points: p=0.009 #GCU would use this to compare nests and random points
 # fall nest and summer random point: p=0.04356
 # fall random point and fall nest: p = 0.0782
+
+# STC: Significant or close to pairwise results for dispersion WITH Corrected Eigenvalues after adding just Two back in:
+# summer nest and summer point: p = 0.0104458
+# summer nest and fall point: p = 0.0294353
+# fall nest and summper point: p = 0.0545488
 
 # Print the NMDS plot with permanova p value
 mynmds_plot_with_pvalue_nv <- myresult_nv$plot +
