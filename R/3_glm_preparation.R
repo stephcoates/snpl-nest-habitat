@@ -3,7 +3,8 @@
 # load packages and functions
 source('R/packages.R')
 
-alldata <- read_csv('data/SNPL_nest_habitat.csv') %>% 
+alldata <- read_csv('data/SNPL_nest_habitat_clean.csv') %>% 
+#alldata <- read_csv('data/SNPL_nest_habitat.csv') %>% 
   filter(!is.na(ID)) 
 pairingsdata <- read_csv('data/nest_random_pairs.csv') %>% 
   filter(!is.na(`Collected Fall`)) 
@@ -37,7 +38,7 @@ reg1data <- alldata1 %>%
     PointID = paste0(PairID, Type) 
   ) %>%
   filter(Spec != "Water") %>% 
-  select(-Dead, -Unspec, -Spec, -`Collection Period`, -Fate, - DeadVeg)  
+  select(-Unspec, -Spec, -`Collection Period`)  
 
 # create seasonal data sets: breeding season and post-breeding fall; filtering to 
 # just the points that were sampled in both seasons.
@@ -88,9 +89,9 @@ covertypes_remove.fall <- summary_of_zeros1.fall %>%
   names()
 
 # remove variables that we aren't interested in for this analysis
-all_df <- reg1data %>% dplyr::select(-c(all_of(covertypes_remove), MI, Sand, Live))
-summer_df <- reg1data_nesting %>% dplyr::select(-c(all_of(covertypes_remove), MI, Sand, Live))
-fall_df <- reg1data_fall %>% dplyr::select(-c(all_of(covertypes_remove), MI, Sand, Live))
+all_df <- reg1data %>% dplyr::select(-c(all_of(covertypes_remove), MI, Live))
+summer_df <- reg1data_nesting %>% dplyr::select(-c(all_of(covertypes_remove), MI, Live))
+fall_df <- reg1data_fall %>% dplyr::select(-c(all_of(covertypes_remove), MI, Live))
 
 write.csv(all_df, "data/glm_alldat.csv")
 write.csv(summer_df, "data/glm_breedingdat.csv")
