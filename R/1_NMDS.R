@@ -5,7 +5,7 @@
 source('R/packages.R')
 source('R/functions_NMDS.R')
 
-alldata <- read_csv('data/SNPL_nest_habitat_clean.csv')
+alldata <- read_csv('data/SNPL_nest_habitat_CLEAN.csv')
 
 # NMDS data preparation ----
 # add group type prefixes based on location type and season

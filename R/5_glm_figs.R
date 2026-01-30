@@ -1,4 +1,5 @@
 # Plotting selected models from logistic regression
+# 1 All data - manuscript figure
 # 1.a. All data - Summarized Microhabitat
 # 1.b. All data - Functional Groups
 # 1.c. All data - Individual species
@@ -781,7 +782,7 @@ facet_summerdata_3groups <- plot_grid(top_row, middle_row, bottom_row, legend_ro
 # Display
 print(facet_summerdata_3groups)
 
-ggsave("fig/facet_summerdata_3groups.jpg", plot = facet_summerdata_3groups, width = 170, height = 170, units = "mm", dpi = 300) #adjust size as needed
+#ggsave("fig/facet_summerdata_3groups.jpg", plot = facet_summerdata_3groups, width = 170, height = 170, units = "mm", dpi = 300) #adjust size as needed
 
 
 # 3.a. Fall data - Summarized Microhabitat ----
@@ -1270,4 +1271,4 @@ facet_falldata_3groups <- plot_grid(top_row, middle_row, bottom_row, legend_row,
 # Display
 print(facet_falldata_3groups)
 
-ggsave("fig/facet_falldata_3groups.jpg", plot = facet_falldata_3groups, width = 170, height = 170, units = "mm", dpi = 300) #adjust size as needed
+#ggsave("fig/facet_falldata_3groups.jpg", plot = facet_falldata_3groups, width = 170, height = 170, units = "mm", dpi = 300) #adjust size as needed

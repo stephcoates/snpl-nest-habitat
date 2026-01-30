@@ -4,7 +4,7 @@
 source('R/packages.R')
 source('R/functions_glm.R')
 
-alldata <- read_csv('data/SNPL_nest_habitat_clean.csv') %>% 
+alldata <- read_csv('data/SNPL_nest_habitat_CLEAN.csv') %>% 
   filter(!is.na(ID)) 
 pairingsdata <- read_csv('data/nest_random_pairs.csv') %>% 
   filter(!is.na(`Collected Fall`)) 

@@ -5,7 +5,6 @@
 # load packages and functions and data
 source('R/packages.R')
 source('R/functions_glm.R')
-library(emmeans)
 
 # make an exploratory dataframe
 ex_df <- read.csv("data/glm_alldat.csv")
