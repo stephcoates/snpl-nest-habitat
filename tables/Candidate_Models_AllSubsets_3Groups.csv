@@ -1,34 +1,34 @@
 Model,Formula,K,AIC,DeltaAIC,Deviance,df
-fullmod.1.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2)",7,118.48512719758963,0,104.48512719758962,162
-fullmod.2.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + Viewshed_sc",8,118.88844533154136,0.40331813395172844,102.88844533154139,161
-fullmod.1.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders",6,119.34444007168247,0.8593128740928364,107.34444007168253,163
-fullmod.1.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + poly(SR, 2) + WO",9,119.67355465758727,1.1884274599976408,101.67355465758725,160
-fullmod.2.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders +      NonVeg",7,119.82950342155794,1.344376223968311,105.8295034215579,162
-fullmod.3.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders +      Viewshed_sc",7,119.93674012776026,1.4516129301706258,105.93674012776023,162
-fullmod.3.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + NonVeg",8,120.09693834116418,1.611811143574542,104.09693834116418,161
-fullmod.2.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + poly(SR, 2)",8,120.63875315876572,2.1536259611760897,104.6387531587657,161
-fullmod.3.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + poly(SR, 2) + WO +      Viewshed_sc",10,120.83071527124996,2.3455880736603234,100.83071527124999,159
-fullmod.4.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders +      Secondary_Stabilizers",7,121.3378608194386,2.8527336218489694,107.33786081943857,162
-fullmod.4.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + poly(SR, 2) + WO +      SL",10,121.64686199539007,3.1617347978004346,101.64686199539013,159
-fullmod.4.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + poly(DeadVegManual,      2)",9,122.3900016283777,3.9048744307880696,104.39000162837782,160
-fullmod.5.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + WO",7,124.83325536630984,6.3481281687202085,110.83325536630988,162
-fullmod.5.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2)",5,133.73650955220046,15.251382354610826,123.73650955220047,164
-summermod.1.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2)",7,53.77908761014607,0,39.779087610146064,73
-summermod.2.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + NonVeg",8,55.29064362040256,1.5115560102564913,39.290643620402584,72
-summermod.3.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + Viewshed_sc",8,55.773914916582356,1.9948273064362851,39.773914916582335,72
-summermod.4.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + poly(DeadVegManual,      2)",9,56.17260308830319,2.39351547815712,38.1726030883032,71
-summermod.1.is,"Outcome ~ Object_Type + BS + poly(SR, 2)",6,61.88692432852081,8.107836718374742,49.886924328520806,74
-summermod.2.is,"Outcome ~ Object_Type + BS + poly(SR, 2) + WO",7,63.07040715507709,9.29131954493102,49.07040715507706,73
-summermod.3.is,"Outcome ~ Object_Type + BS + poly(SR, 2) + SL",7,63.24477062366755,9.465683013521478,49.24477062366756,73
-summermod.4.is,"Outcome ~ Object_Type + BS + poly(SR, 2) + IP",7,63.67024651811833,9.891158907972262,49.67024651811835,73
-summermod.5.is,"Outcome ~ Object_Type + BS + poly(SR, 2) + Viewshed_sc",7,63.87073883660319,10.091651226457117,49.87073883660318,73
-summermod.1.fg,Outcome ~ Object_Type + Pioneer_Stabilizers + Pioneer_Builders,5,64.28183986224798,10.502752252101907,54.28183986224801,75
-summermod.2.fg,Outcome ~ Object_Type + Pioneer_Stabilizers,4,64.41726274976469,10.638175139618617,56.41726274976471,76
-summermod.3.fg,Outcome ~ Object_Type + Pioneer_Stabilizers + Pioneer_Builders +      NonVeg,6,64.74196403492576,10.962876424779687,52.741964034925765,74
-summermod.4.fg,Outcome ~ Object_Type + Pioneer_Stabilizers + Pioneer_Builders +      Secondary_Stabilizers,6,65.71822018074165,11.939132570595582,53.718220180741675,74
-summermod.6.is,Outcome ~ Object_Type + BS + Viewshed_sc,5,66.10490142460252,12.325813814456446,56.10490142460253,75
-summermod.5.fg,Outcome ~ Object_Type + Pioneer_Stabilizers + Pioneer_Builders +      Viewshed_sc,6,66.26929565291869,12.490208042772615,54.26929565291869,74
-summermod.6.fg,Outcome ~ Object_Type + Pioneer_Builders,4,68.18704244145675,14.407954831310683,60.18704244145676,76
+fullmod.1.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2)",7,118.48512719631105,0,104.48512719631107,162
+fullmod.2.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + Viewshed_sc",8,118.88844533060075,0.403318134289691,102.8884453306007,161
+fullmod.1.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders",6,119.34444007434853,0.8593128780374713,107.34444007434855,163
+fullmod.1.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + poly(SR, 2) + WO",9,119.67355465411094,1.1884274577998895,101.67355465411093,160
+fullmod.2.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders +      NonVeg",7,119.82950342452914,1.3443762282180813,105.8295034245291,162
+fullmod.3.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders +      Viewshed_sc",7,119.93674012976786,1.4516129334568006,105.93674012976777,162
+fullmod.3.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + NonVeg",8,120.09693833991196,1.611811143600903,104.09693833991194,161
+fullmod.2.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + poly(SR, 2)",8,120.63875315459272,2.1536259582816655,104.6387531545926,161
+fullmod.3.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + poly(SR, 2) + WO +      Viewshed_sc",10,120.83071526829244,2.345588071981382,100.83071526829252,159
+fullmod.4.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders +      Secondary_Stabilizers",7,121.3378608220928,2.852733625781738,107.33786082209275,162
+fullmod.4.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + poly(SR, 2) + WO +      SL",10,121.64686199188826,3.1617347955772033,101.64686199188819,159
+fullmod.4.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + poly(DeadVegManual,      2)",9,122.39000162659208,3.9048744302810263,104.39000162659202,160
+fullmod.5.is,"Outcome ~ Object_Type + poly(BS, 2) + IP + WO",7,124.83325535952905,6.348128163217993,110.833255359529,162
+fullmod.5.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2)",5,133.73650955220046,15.251382355889405,123.73650955220047,164
+summermod.1.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2)",7,53.77908760968442,0,39.7790876096844,73
+summermod.2.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + NonVeg",8,55.29064361999241,1.5115560103079915,39.2906436199924,72
+summermod.3.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + Viewshed_sc",8,55.77391491613105,1.9948273064466306,39.773914916131034,72
+summermod.4.sm,"Outcome ~ Object_Type + poly(TwoVeg, 2) + poly(Half, 2) + poly(DeadVegManual,      2)",9,56.17260309011207,2.393515480427652,38.172603090112084,71
+summermod.1.is,"Outcome ~ Object_Type + BS + poly(SR, 2)",6,61.88692432633624,8.107836716651825,49.886924326336214,74
+summermod.2.is,"Outcome ~ Object_Type + BS + poly(SR, 2) + WO",7,63.07040715382792,9.291319544143505,49.07040715382792,73
+summermod.3.is,"Outcome ~ Object_Type + BS + poly(SR, 2) + SL",7,63.244770620975935,9.465683011291517,49.24477062097597,73
+summermod.4.is,"Outcome ~ Object_Type + BS + poly(SR, 2) + IP",7,63.67024651519844,9.891158905514025,49.67024651519844,73
+summermod.5.is,"Outcome ~ Object_Type + BS + poly(SR, 2) + Viewshed_sc",7,63.870738834396604,10.091651224712187,49.87073883439662,73
+summermod.1.fg,Outcome ~ Object_Type + Pioneer_Stabilizers + Pioneer_Builders,5,64.28183986362396,10.50275225393954,54.28183986362396,75
+summermod.2.fg,Outcome ~ Object_Type + Pioneer_Stabilizers,4,64.41726274976469,10.638175140080271,56.41726274976471,76
+summermod.3.fg,Outcome ~ Object_Type + Pioneer_Stabilizers + Pioneer_Builders +      NonVeg,6,64.74196403632197,10.962876426637557,52.74196403632197,74
+summermod.4.fg,Outcome ~ Object_Type + Pioneer_Stabilizers + Pioneer_Builders +      Secondary_Stabilizers,6,65.71822018220232,11.939132572517899,53.71822018220234,74
+summermod.6.is,Outcome ~ Object_Type + BS + Viewshed_sc,5,66.10490142460252,12.3258138149181,56.10490142460253,75
+summermod.5.fg,Outcome ~ Object_Type + Pioneer_Stabilizers + Pioneer_Builders +      Viewshed_sc,6,66.26929565424112,12.490208044556702,54.26929565424113,74
+summermod.6.fg,Outcome ~ Object_Type + Pioneer_Builders,4,68.18704244344278,14.40795483375836,60.18704244344273,76
 fallmod.1.is,"Outcome ~ Object_Type + IP + poly(BS, 2) + SR + Viewshed_sc",8,63.21889043760397,0,47.21889043760395,72
 fallmod.2.is,"Outcome ~ Object_Type + IP + poly(BS, 2) + SR",7,63.45624004334828,0.2373496057443134,49.45624004334829,73
 fallmod.1.fg,"Outcome ~ Object_Type + poly(Pioneer_Stabilizers, 2) + Pioneer_Builders +      Viewshed_sc",7,64.06272647838973,0.8438360407857672,50.06272647838971,73
