@@ -29,7 +29,7 @@ summary(anova_mod)
 
 emmeans(anova_mod, pairwise ~ Season * Type)
 # these tests tell us that nests and random points have different IP cover (specifically
-# fall nests and random points from either season), but IP cover is not statistically
+# nests and random points within both seasons), but IP cover is not statistically
 # different between seasons
 
 # Compare viewshed at nests and random points in breeding season and fall
@@ -53,8 +53,8 @@ emmeans(anova_mod_v, pairwise ~ Season * Type)
 # statistically different by season.
 
 ## Compare changes for other variables in the fall vs. summer models ----
-# IP and Viewshed showing up in fall but not summer isn't really explained by
-# seassonal differences in either (because it's not statistically different)
+# IP and Viewshed showing up in fall models but not summer models isn't really 
+# explained by seasonal differences in either (because it's not statistically different)
 
 # Compare TwoVeg at nests and random points in breeding season and fall
 Two_tab <- ex_df %>%
