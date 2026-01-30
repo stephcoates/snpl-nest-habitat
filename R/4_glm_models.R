@@ -896,7 +896,7 @@ tab <- as.data.frame(pw) %>%
     # Clean p-value formatting 
     p_value = ifelse(p.value < 1e-4, "<0.0001", sprintf("%.4f", p.value)),
     
-    # Make a nicer comparison label
+    # Make a comparison label
     Comparison = contrast %>%
       str_replace_all("\\(", "") %>%
       str_replace_all("\\)", "") %>%
