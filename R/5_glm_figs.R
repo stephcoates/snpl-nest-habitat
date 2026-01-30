@@ -431,21 +431,21 @@ top_row <- plot_grid(
   label_top,
   plot_grid(TwoVegp, Halfp, empty_plot, nrow = 1, rel_widths = c(1,1,1)),
   ncol = 2,
-  rel_widths = c(0.05, 0.95)  # narrow label, wide plots
+  rel_widths = c(0.08, 0.92)  # narrow label, wide plots
 )
 
 middle_row <- plot_grid(
   label_middle,
   plot_grid(PSp, PBp, empty_plot, nrow = 1, rel_widths = c(1,1,1)),
   ncol = 2,
-  rel_widths = c(0.05, 0.95)
+  rel_widths = c(0.08, 0.92)
 )
 
 bottom_row <- plot_grid(
   label_bottom,
   plot_grid(BSp, SRp, IPp, nrow = 1, rel_widths = c(1,1,1)),
   ncol = 2,
-  rel_widths = c(0.05, 0.95)
+  rel_widths = c(0.08, 0.92)
 )
 
 # Combine all rows with legend
