@@ -142,17 +142,24 @@ font_theme <- theme(
 )
 
 # Plotting: Function to create a vertical label plot
-make_row_label <- function(label_text, width = 10) {
+make_row_label <- function(label_text, width = 12, text_size = 4) {
+  label_text <- stringr::str_wrap(label_text, width = width)
   ggplot() +
     annotate(
-      "text", 
-      x = 0.5, y = 0.5, 
-      label = str_wrap(label_text, width = width),  # wrap text
-      angle = 90, 
-      size = 4, 
-      hjust = 0.5, vjust = 0.5
+      "text",
+      x = 0.5, y = 0.5,
+      label = label_text,
+      angle = 90,
+      size = text_size,
+      hjust = 0.5, vjust = 0.5,
+      lineheight = 1.15   # space between wrapped lines
     ) +
-    theme_void()
+    theme_void() +
+    theme(
+      plot.margin = margin(t = 0, r = 8, b = 0, l = 10)
+    ) +
+    # expand the drawing area to prevent clipping when rotated
+    coord_cartesian(clip = "off")
 }
 
 # Create model results tables
