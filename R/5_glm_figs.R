@@ -1,5 +1,6 @@
 # Plotting selected models from logistic regression
-# 1 All data - manuscript figure
+# Contents:
+# 1 All data - for manuscript figure
 # 1.a. All data - Summarized Microhabitat
 # 1.b. All data - Functional Groups
 # 1.c. All data - Individual species
