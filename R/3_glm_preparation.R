@@ -2,9 +2,9 @@
 
 # load packages and functions
 source('R/packages.R')
+source('R/functions_glm.R')
 
 alldata <- read_csv('data/SNPL_nest_habitat_clean.csv') %>% 
-#alldata <- read_csv('data/SNPL_nest_habitat.csv') %>% 
   filter(!is.na(ID)) 
 pairingsdata <- read_csv('data/nest_random_pairs.csv') %>% 
   filter(!is.na(`Collected Fall`)) 
@@ -89,6 +89,7 @@ covertypes_remove.fall <- summary_of_zeros1.fall %>%
   names()
 
 # remove variables that we aren't interested in for this analysis
+# includes rare covery types, Miscellaneous (not informative), and LiveVeg (approx inverse of DeadVeg)
 all_df <- reg1data %>% dplyr::select(-c(all_of(covertypes_remove), MI, Live))
 summer_df <- reg1data_nesting %>% dplyr::select(-c(all_of(covertypes_remove), MI, Live))
 fall_df <- reg1data_fall %>% dplyr::select(-c(all_of(covertypes_remove), MI, Live))
