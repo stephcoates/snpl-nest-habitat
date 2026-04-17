@@ -356,109 +356,213 @@ print(IP_cover)
 
 # 1.d. Facet Plot for All Data ----
 
-# Remove legends and apply correct titles/axis labels
-TwoVegp <- TwoVeg_cover + theme(legend.position = "none",
-                                plot.title = element_text(size = 11),
-                                axis.title.x = element_text(size = 10), 
-                                axis.title.y = element_text(size = 10)) +
-  scale_color_grey() + scale_fill_grey() +
-  font_theme + 
-  labs(title = "(a) Veg cover 2 m", x = "% cover in 2 m radius", 
-       y = "Probability of nest")
-
-Halfp <- Half_cover + theme(legend.position = "none") +
-  scale_color_grey() + scale_fill_grey() +
-  font_theme + 
-  labs(title = "(b) Total cover 0.5 m", 
-       x = "% cover in 0.5 m radius")
-
-PSp <- PS_cover + theme(legend.position = "none", 
-                        plot.title = element_text(size = 11), 
-                        axis.title.x = element_text(size = 10), 
-                        axis.title.y = element_text(size = 10)) +
-  scale_color_grey() + scale_fill_grey() +
-  labs(title = "(c) Pioneer stabilizers", x = "% cover in 2 m radius", 
-       y = "Probability of nest")
-
-PBp <- PB_cover + theme(legend.position = "none") +
-  scale_color_grey() + scale_fill_grey() +
-  font_theme + 
-  labs(title = "(d) Pioneer builders", x = "% cover in 2 m radius", 
-       y = "Probability of nest")
-
-BSp <- BS_cover + theme(legend.position = "none", 
-                        plot.title = element_text(size = 11), 
-                        axis.title.x = element_text(size = 10), 
-                        axis.title.y = element_text(size = 10)) +
-  scale_color_grey() + scale_fill_grey() +
-  font_theme + 
-  labs(title = "(e) Beach bur sage", x = "% cover in 2 m radius", 
-       y = "Probability of nest")
-
-SRp <- SR_cover + theme(legend.position = "none") +
-  scale_color_grey() + scale_fill_grey() +
-  font_theme + 
-  labs(title = "(f) Sea rocket", x = "% cover in 2 m radius", 
-       y = "Probability of nest")
-
-IPp <- IP_cover + theme(legend.position = "none") +
-  scale_color_grey() + scale_fill_grey() +
-  font_theme + 
-  labs(title = "(g) Dead ice plant", x = "% cover in 2 m radius", 
-       y = "Probability of nest")
-
-
-# Extract single legend before removing it from the plot
-legend <- get_legend(
-  BSp +
-    theme(
-      legend.position = "right",
-      legend.direction = "horizontal",
-      legend.title = element_text(size = 10),
-      legend.text = element_text(size = 10)
-    ) +
-    guides(color = guide_legend(nrow=1))
+# Smaller axis text
+axis_text_small <- theme(
+  axis.text.x = element_text(size = rel(0.8)),
+  axis.text.y = element_text(size = rel(0.8))
 )
 
-# Make an empty plot for spacing
+# plot theme adjustments
+# - plot.title.position = "plot" keeps all titles anchored consistently
+# - negative left margin shifts all titles left by the same amount
+# - extra right plot margin gives the titles more room so they do not get cut off
+title_left_theme <- theme(
+  legend.position = "none",
+  axis.title = element_blank(),
+  plot.title.position = "plot",
+  plot.title = element_text(
+    size = rel(0.9),
+    hjust = 0,
+    margin = margin(t = 2, r = 0, b = 8, l = 5)
+  ),
+  plot.margin = margin(t = 10, r = 18, b = 5.5, l = 5.5)
+)
+
+# --- Individual plots ---
+TwoVegp <- TwoVeg_cover +
+  scale_color_grey() + scale_fill_grey() +
+  font_theme +
+  axis_text_small +
+  title_left_theme +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.02))) +
+  labs(title = "(a) Plant cover 2 m", x = NULL, y = NULL)
+
+Halfp <- Half_cover +
+  scale_color_grey() + scale_fill_grey() +
+  font_theme +
+  axis_text_small +
+  title_left_theme +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.02))) +
+  labs(title = "(b) Total cover 50 cm", x = NULL, y = NULL)
+
+PSp <- PS_cover +
+  scale_color_grey() + scale_fill_grey() +
+  font_theme +
+  axis_text_small +
+  title_left_theme +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.02))) +
+  labs(title = "(c) Pioneer stabilizers 2 m", x = NULL, y = NULL)
+
+PBp <- PB_cover +
+  scale_color_grey() + scale_fill_grey() +
+  font_theme +
+  axis_text_small +
+  title_left_theme +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.02))) +
+  labs(title = "(d) Pioneer builders 2 m", x = NULL, y = NULL)
+
+BSp <- BS_cover +
+  scale_color_grey() + scale_fill_grey() +
+  font_theme +
+  axis_text_small +
+  title_left_theme +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.02))) +
+  labs(title = "(e) Beach bur sage 2 m", x = NULL, y = NULL)
+
+SRp <- SR_cover +
+  scale_color_grey() + scale_fill_grey() +
+  font_theme +
+  axis_text_small +
+  title_left_theme +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.02))) +
+  labs(title = "(f) Sea rocket 2 m", x = NULL, y = NULL)
+
+IPp <- IP_cover +
+  scale_color_grey() + scale_fill_grey() +
+  font_theme +
+  axis_text_small +
+  title_left_theme +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.02))) +
+  labs(title = "(g) Dead ice plant 2 m", x = NULL, y = NULL)
+
+# --- Legend ---
+legend <- get_legend(
+  BSp +
+    font_theme +
+    theme(
+      legend.position = "right",
+      legend.direction = "horizontal"
+    ) +
+    guides(color = guide_legend(nrow = 1))
+)
+
+# Empty plot for spacing
 empty_plot <- ggplot() + theme_void()
 
-# Create label plots
+# Row labels
 label_top    <- make_row_label("Summarized Microhabitat")
 label_middle <- make_row_label("Functional Groups")
 label_bottom <- make_row_label("Individual Species")
 
-# Example top row: label + plots
-top_row <- plot_grid(
+# Shared y-axis label
+y_axis_label <- ggplot() +
+  annotate(
+    "text",
+    x = 0.55, y = 0.5,
+    label = "Probability of nest",
+    angle = 90
+  ) +
+  font_theme +
+  theme_void() +
+  theme(
+    plot.margin = margin(t = 6, r = 2, b = 10, l = 2)
+  )
+
+# Shared x-axis label
+x_axis_label <- ggplot() +
+  annotate(
+    "text",
+    x = 0.5, y = 1.5,  
+    label = "% cover"
+  ) +
+  font_theme +
+  theme_void()
+
+# --- Plot rows ---
+top_plots <- plot_grid(
+  TwoVegp, Halfp, empty_plot,
+  nrow = 1,
+  align = "h"
+)
+
+middle_plots <- plot_grid(
+  PSp, PBp, empty_plot,
+  nrow = 1,
+  align = "h"
+)
+
+bottom_plots <- plot_grid(
+  BSp, SRp, IPp,
+  nrow = 1,
+  align = "h"
+)
+
+plots_combined <- plot_grid(
+  top_plots,
+  middle_plots,
+  bottom_plots,
+  ncol = 1,
+  align = "v",
+  rel_heights = c(1, 1, 1)
+)
+
+row_labels_combined <- plot_grid(
   label_top,
-  plot_grid(TwoVegp, Halfp, empty_plot, nrow = 1, rel_widths = c(1,1,1)),
-  ncol = 2,
-  rel_widths = c(0.08, 0.92)  # narrow label, wide plots
-)
-
-middle_row <- plot_grid(
   label_middle,
-  plot_grid(PSp, PBp, empty_plot, nrow = 1, rel_widths = c(1,1,1)),
-  ncol = 2,
-  rel_widths = c(0.08, 0.92)
-)
-
-bottom_row <- plot_grid(
   label_bottom,
-  plot_grid(BSp, SRp, IPp, nrow = 1, rel_widths = c(1,1,1)),
-  ncol = 2,
-  rel_widths = c(0.08, 0.92)
+  ncol = 1,
+  align = "v",
+  rel_heights = c(1, 1, 1)
 )
 
-# Combine all rows with legend
-legend_row <- plot_grid(legend, nrow = 1)
-facet_alldata_3groups <- plot_grid(top_row, middle_row, bottom_row, legend_row, ncol = 1, rel_heights = c(1,1,1,0.2))
+# Main panel: row labels | y-axis label | facet plots
+main_panel <- plot_grid(
+  row_labels_combined,
+  y_axis_label,
+  plots_combined,
+  ncol = 3,
+  rel_widths = c(0.08, 0.035, 0.885)
+)
+
+# X-axis label row
+x_row <- plot_grid(
+  empty_plot,
+  empty_plot,
+  x_axis_label,
+  ncol = 3,
+  rel_widths = c(0.08, 0.02, 0.90)
+)
+
+# Spacer to push legend down so it does not cover the x-axis label
+legend_spacer <- ggplot() + theme_void()
+
+# Legend row
+legend_row <- plot_grid(
+  legend,
+  nrow = 1
+)
+
+# Final layout
+facet_alldata_3groups <- plot_grid(
+  main_panel,
+  x_row,
+  legend_row,
+  ncol = 1,
+  rel_heights = c(1, 0.04, 0.06)
+)
 
 # Display
 print(facet_alldata_3groups)
 
-ggsave("fig/facet_alldata_3groups.jpg", plot = facet_alldata_3groups, width = 170, height = 170, units = "mm", dpi = 300) #adjust size as needed
-
+# Save
+ggsave(
+  "fig/facet_alldata_3groups.jpg",
+  plot = facet_alldata_3groups,
+  width = 170,
+  height = 170,
+  units = "mm",
+  dpi = 300
+)
 
 # 2.a. Summer subset - Summarized Microhabitat ----
 
