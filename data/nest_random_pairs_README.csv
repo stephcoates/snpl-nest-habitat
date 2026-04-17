@@ -1,0 +1,6 @@
+"Metadata for nest_random_paris.csv, used for pairing nests to random points. ",
+,
+SX Nest,Nest unique number. 
+rSX RP,Random point unique number. 
+Collected Nesting,"Whether data point was collected in the nesting season. ""Y"" = yes, ""N"" = no. "
+Collected Fall,"Whether data point was collected in the fall season. ""Y"" = yes, ""N"" = no. "

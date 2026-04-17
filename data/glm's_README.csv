@@ -1,0 +1,29 @@
+"Metadata for glm_alldat.csv, glm_breedingdat.csv, and glm_falldat.csv. ",
+,
+ID,ID number given to nest or random point. 
+Type,Type of point. Nest point or random point. 
+Date,Date of sample collection. 
+Season,Season of collection: summer (nesting season) or fall (after nesting season has ended). 
+Latitude,Geographic latitude in decimal degrees. WGS84
+Longitude,Geographic longitude in decimal degrees. WGS84
+Half,Percent total cover in a 0.5 m radius. 
+Two,Percent total cover in a 2 m radius. 
+TwoVeg,Percent live and dead vegetative cover in a 2 m radius. 
+DeadVegManual,Renamed to DeadVeg in script. Percent dead vegetative cover in a 2 m radius. 
+SR,Percent Sea Rocket Cakile maritima cover in a 2 m radius. 
+IP,Percent Ice Plant Carpobrotus spp. cover in a 2 m radius. 
+BS,Percent Beach Bur Sage Ambrosia chamissonis cover in a 2 m radius. 
+WO,Percent woody debris cover in a 2 m radius. 
+SL,Percent shell (> 3 cm) cover in a 2 m radius. 
+Viewshed,Visual estimate of degrees of unobstructed viewshed within a 20 m radius. (0-360 degrees)
+Pioneer_Builders,Percent Pioneer Builders cover in a 2 m radius. 
+Secondary_Stabilizers,Percent Secondary Stabilizers cover in a 2 m radius. 
+Pioneer_Stabilizers,Percent Pioneer Stabilizers cover in a 2 m radius. 
+NonVeg,Percent Nonvegetative cover in a 2 m radius. 
+PairID,Paired nest to survey point. (sx #) is the site code and nest number. 
+Object,Present or absence of object at survey point (w/in 15 cm). 
+Object_Type,"Type of object present at survey point (w/in 15 cm): Vegetative object, nonveg object (wood or shell), or no object."
+Viewshed_sc,Scaled viewshed between 0 and 1. 
+SeasonN,"Season of data collection. 1 = nesting season, 2 = fall. "
+Outcome,"Point type: 1 = nests, 0 = random points. "
+PointID,Unique ID given to nest or random point.
