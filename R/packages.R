@@ -15,6 +15,7 @@ library(car)
 library(broom.mixed)
 library(stringr)
 library(emmeans)
+library(ggrepel)
 
 conflicted::conflict_prefer("select", "dplyr")
 conflicted::conflict_prefer("filter", "dplyr")

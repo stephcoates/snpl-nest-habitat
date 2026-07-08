@@ -1,19 +1,18 @@
 # NMDS function without p-value/adonis analysis ----
-nmds <- function(data, title, k = 2, labelpoints = FALSE) {
+nmds <- function(data, title, k = 2, labelpoints = FALSE, max_covariate_labels = 6) {
   
-  # Determine subset based on the title argument
   subset_data <- switch(
     title,
-    "NMDS: Summer Nest vs Fall Nest"    = data[grepl("^SN|^FN", rownames(data)), ],
-    "NMDS: Summer Point vs Fall Point" = data[grepl("^SP|^FP", rownames(data)), ],
-    "NMDS: Summer Nest vs Summer Point"= data[grepl("^SN|^SP", rownames(data)), ],
-    "NMDS: Fall Nest vs Fall Point"    = data[grepl("^FN|^FP", rownames(data)), ],
-    "NMDS: All Groups"                 = data,
-    "NMDS: Functional Groups"          = data,
+    "NMDS: Summer Nest vs Fall Nest"     = data[grepl("^SN|^FN", rownames(data)), ],
+    "NMDS: Summer Point vs Fall Point"  = data[grepl("^SP|^FP", rownames(data)), ],
+    "NMDS: Summer Nest vs Summer Point" = data[grepl("^SN|^SP", rownames(data)), ],
+    "NMDS: Fall Nest vs Fall Point"     = data[grepl("^FN|^FP", rownames(data)), ],
+    "NMDS: All Groups"                  = data,
+    "NMDS: Functional Groups"           = data,
+    "NMDS: Landscape Variability"       = data,
     stop("title not recognized in switch()")
   )
   
-  # Define the canonical group levels ONCE (order matters)
   group_levels <- c(
     "Breeding Season Nest Site",
     "Fall Nest Site",
@@ -21,7 +20,6 @@ nmds <- function(data, title, k = 2, labelpoints = FALSE) {
     "Fall Random Point"
   )
   
-  # Palette and shapes keyed to those exact labels
   pal <- c(
     "Breeding Season Nest Site"     = "#0072B2",
     "Fall Nest Site"               = "#009E73",
@@ -36,11 +34,7 @@ nmds <- function(data, title, k = 2, labelpoints = FALSE) {
     "Fall Random Point"            = 12
   )
   
-  # Add Group labels for plotting
-  rn <- rownames(subset_data)
-  
-  # defensive: trim whitespace just in case
-  rn <- trimws(rn)
+  rn <- trimws(rownames(subset_data))
   
   groups <- dplyr::case_when(
     grepl("^SN", rn) ~ "Breeding Season Nest Site",
@@ -50,52 +44,58 @@ nmds <- function(data, title, k = 2, labelpoints = FALSE) {
     TRUE ~ NA_character_
   )
   
-  # Run NMDS
-  nmds_result <- vegan::metaMDS(subset_data, distance = "bray", k = k, trymax = 1000)
+  nmds_result <- vegan::metaMDS(
+    subset_data,
+    distance = "bray",
+    k = k,
+    trymax = 1000
+  )
   
-  if (is.null(nmds_result$stress)) {
-    stop("NMDS failed to converge.")
-  }
-  
-  # Extract NMDS site scores
   nmds_scores <- as.data.frame(vegan::scores(nmds_result, display = "sites"))
   rownames(nmds_scores) <- rownames(subset_data)
-  
-  # Force Group to a factor with fixed levels
   nmds_scores$Group <- factor(groups, levels = group_levels)
   
-  # If you have NA groups, show them clearly (and you can choose to drop them)
-  if (any(is.na(nmds_scores$Group))) {
-    message("Missing Group labels detected. These rows will NOT be plotted:\n",
-            paste(rownames(nmds_scores)[is.na(nmds_scores$Group)], collapse = ", "))
-    nmds_scores <- dplyr::filter(nmds_scores, !is.na(Group))
-  }
+  nmds_scores <- nmds_scores %>%
+    dplyr::filter(!is.na(Group))
   
-  # Extract species scores for plotting
   species_scores <- as.data.frame(vegan::scores(nmds_result, display = "species"))
   
-  # Generate convex hulls for each group
+  species_scores <- species_scores %>%
+    dplyr::mutate(
+      label = rownames(species_scores),
+      NMDS1_lab = NMDS1 / 2,
+      NMDS2_lab = NMDS2 / 2,
+      dist_from_origin = sqrt(NMDS1_lab^2 + NMDS2_lab^2)
+    ) %>%
+    dplyr::arrange(dplyr::desc(dist_from_origin))
+  
+  species_scores_labeled <- species_scores %>%
+    dplyr::slice_head(n = max_covariate_labels)
+  
+  message("Covariate labels plotted for ", title, ": ", nrow(species_scores_labeled))
+  
   find_hull <- function(df) df[chull(df$NMDS1, df$NMDS2), ]
   
   hulls <- nmds_scores %>%
     dplyr::group_by(Group) %>%
     dplyr::do(find_hull(.))
   
-  # Stress grob
   grob <- grid::grobTree(
     grid::textGrob(
       paste0("Stress = ", round(nmds_result$stress, 3)),
-      x = 0.9, y = 0.9, hjust = 1,
+      x = 0.9,
+      y = 0.9,
+      hjust = 1,
       gp = grid::gpar(col = "black", fontsize = 9)
     )
   )
   
-  # Plot NMDS results
   nmds_plot <- ggplot2::ggplot() +
     ggplot2::geom_polygon(
       data = hulls,
       ggplot2::aes(x = NMDS1, y = NMDS2, fill = Group),
-      alpha = 0.2, color = NA
+      alpha = 0.2,
+      color = NA
     ) +
     ggplot2::geom_point(
       data = nmds_scores,
@@ -103,14 +103,19 @@ nmds <- function(data, title, k = 2, labelpoints = FALSE) {
       size = 3
     ) +
     ggplot2::geom_text(
-      data = species_scores,
-      ggplot2::aes(x = NMDS1 / 2, y = NMDS2 / 2, label = rownames(species_scores)),
-      color = "black", size = 3, vjust = -0.5
+      data = species_scores_labeled,
+      ggplot2::aes(
+        x = NMDS1_lab,
+        y = NMDS2_lab,
+        label = label
+      ),
+      color = "black",
+      size = 2.6,
+      check_overlap = TRUE
     ) +
     ggplot2::annotation_custom(grob) +
     ggplot2::theme_minimal() +
     ggplot2::labs(title = title, x = "NMDS1", y = "NMDS2") +
-    # LOCK mapping across plots + legend extraction
     ggplot2::scale_shape_manual(
       name = "Group",
       values = shp,
@@ -134,20 +139,33 @@ nmds <- function(data, title, k = 2, labelpoints = FALSE) {
       drop = FALSE,
       na.translate = FALSE
     ) +
-    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(hjust = 0.5),
+      plot.margin = ggplot2::margin(10, 20, 10, 10)
+    )
   
   if (isTRUE(labelpoints)) {
     nmds_plot <- nmds_plot +
       ggplot2::geom_text(
         data = nmds_scores,
-        ggplot2::aes(x = NMDS1, y = NMDS2, label = rownames(nmds_scores), color = Group),
-        show.legend = FALSE
+        ggplot2::aes(
+          x = NMDS1,
+          y = NMDS2,
+          label = rownames(nmds_scores),
+          color = Group
+        ),
+        show.legend = FALSE,
+        check_overlap = TRUE
       )
   }
   
-  return(list(plot = nmds_plot, nmds_result = nmds_result))
+  return(list(
+    plot = nmds_plot,
+    nmds_result = nmds_result,
+    species_scores = species_scores,
+    species_scores_labeled = species_scores_labeled
+  ))
 }
-
 
 # Pairwise adjusted permanova function ----
 # adjusted pairwise results using external function with Bonferonni adjusted p-value

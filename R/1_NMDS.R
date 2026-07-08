@@ -70,7 +70,9 @@ summary(groups_nv)
 
 # run NMDS on data with scaled viewshed
 set.seed(12)
-myresult_nv <- nmds(nmdsdata_nv,"NMDS: All Groups")
+myresult_nv <- nmds(nmdsdata_nv,
+                    "NMDS: All Groups",
+                    max_covariate_labels = Inf)
 myresult_nv
 stressplot(myresult_nv$nmds_result)
 
@@ -185,7 +187,9 @@ summary(groups_fg) #Count up number of locations left within each group
 
 # run NMDS on data with scaled viewshed
 set.seed(12)
-myresult_fg <- nmds(nmdsdata_fg,"NMDS: Functional Groups")
+myresult_fg <- nmds(nmdsdata_fg,
+                    "NMDS: Functional Groups",
+                    max_covariate_labels = Inf)
 myresult_fg
 stressplot(myresult_fg$nmds_result)
 
@@ -251,7 +255,10 @@ summary(groups_sp0) #count how many locations in each group
 
 # run NMDS
 set.seed(12)
-myresult_sp0 <- nmds(nmdsdata_sp0,"NMDS: All Groups", labelpoints = FALSE)
+myresult_sp0 <- nmds(nmdsdata_sp0,
+                     "NMDS: All Groups", 
+                     labelpoints = FALSE,
+                     max_covariate_labels = 12)
 myresult_sp0
 stressplot(myresult_sp0$nmds_result)
 
